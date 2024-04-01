@@ -1,4 +1,4 @@
-package unipar.br.apitripshare.dto;
+package unipar.br.apitripshare.dto.tweets;
 
 import java.util.List;
 

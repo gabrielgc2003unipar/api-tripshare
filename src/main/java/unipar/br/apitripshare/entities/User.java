@@ -1,12 +1,10 @@
 package unipar.br.apitripshare.entities;
 
 import jakarta.persistence.*;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import unipar.br.apitripshare.dto.LoginRequestDTO;
+import unipar.br.apitripshare.dto.users.LoginRequestDTO;
 
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -29,7 +27,8 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private List<Role> roles;
-
+    @OneToMany
+    private List<TripPost> tripPosts;
 
     public UUID getUserId() {
         return userId;

@@ -1,4 +1,4 @@
-package unipar.br.apitripshare.dto;
+package unipar.br.apitripshare.dto.users;
 
 public record CreateUserDTO(String username, String password) {
 }
