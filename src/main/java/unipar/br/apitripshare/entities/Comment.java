@@ -9,15 +9,14 @@ import java.time.Instant;
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "comment_id")
     private Long id;
     @Column(name = "ds_content")
     private String content;
-    @ManyToOne
+    @OneToOne
+    @JoinColumn(name = "user_id")
     private User user;
     @ManyToOne
     private TripPost tripPost;
-
     @Column(name = "dt_create")
     private Instant creationTimestamp;
 

@@ -3,6 +3,7 @@ package unipar.br.apitripshare.entities;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -10,30 +11,29 @@ import java.util.List;
 public class TripPost {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "trip_post_id")
     private Long id;
     @Column(name = "dt_post")
     private Instant datePost;
     @Column(name = "ds_destination")
     private String destination;
-    @ManyToOne
+    @Column(name = "ds_description")
+    private String description;
+    @OneToOne
     private User user;
-    @OneToMany
-    private List<Photo> photos;
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "tb_trip_post_comment",
-            joinColumns = @JoinColumn(name = "trip_post_id"),
-            inverseJoinColumns = @JoinColumn(name = "comment_id")
-    )
-    private List<Comment> comments;
+    @OneToMany(mappedBy = "tripPost", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Photo> photos  = new ArrayList<>();
+
+    @OneToMany(mappedBy = "tripPost", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Comment> comments  = new ArrayList<>();
 
     public TripPost() {
     }
-    public TripPost(Long id, Instant datePost, String destination, User user, List<Photo> photos, List<Comment> comments) {
+
+    public TripPost(Long id, Instant datePost, String destination, String description, User user, List<Photo> photos, List<Comment> comments) {
         this.id = id;
         this.datePost = datePost;
         this.destination = destination;
+        this.description = description;
         this.user = user;
         this.photos = photos;
         this.comments = comments;
@@ -61,6 +61,14 @@ public class TripPost {
 
     public void setDestination(String destination) {
         this.destination = destination;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public User getUser() {

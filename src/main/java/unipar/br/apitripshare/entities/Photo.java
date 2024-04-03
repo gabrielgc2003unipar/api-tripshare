@@ -7,19 +7,21 @@ import jakarta.persistence.*;
 public class Photo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "photo_id")
     private Long id;
     @Column(name = "ds_url")
     private String url;
+    @Column(name = "ds_description")
+    private String description;
     @ManyToOne
     private TripPost tripPost;
 
     public Photo() {
     }
 
-    public Photo(Long id, String url, TripPost tripPost) {
+    public Photo(Long id, String url, String description, TripPost tripPost) {
         this.id = id;
         this.url = url;
+        this.description = description;
         this.tripPost = tripPost;
     }
 
@@ -37,6 +39,14 @@ public class Photo {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public TripPost getTripPost() {

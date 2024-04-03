@@ -62,7 +62,7 @@ public class TweetService {
                 .stream()
                 .anyMatch(role -> role.getName().equalsIgnoreCase(Role.Values.ADMIN.name()));
 
-        if (isAdmin || tweet.getUser().getUserId().equals(UUID.fromString(token.getName()))) {
+        if (isAdmin || tweet.getUser().getId().equals(UUID.fromString(token.getName()))) {
             try {
                 tweetRepository.deleteById(tweetId);
             } catch (Exception e) {

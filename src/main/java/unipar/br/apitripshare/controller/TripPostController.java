@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import unipar.br.apitripshare.dto.posts.CreateTripPostDTO;
@@ -17,6 +18,7 @@ public class TripPostController {
     public TripPostController(TripPostService tripPostService) {
         this.tripPostService = tripPostService;
     }
+    @RequestMapping("/trip-post")
     public ResponseEntity<Void> createTripPost(@RequestBody CreateTripPostDTO dto,
                                                JwtAuthenticationToken token) {
         try {

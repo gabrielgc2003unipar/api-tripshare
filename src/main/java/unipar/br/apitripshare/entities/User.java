@@ -13,8 +13,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "user_id")
-    private UUID userId;
+    private UUID id;
 
     @Column(unique = true)
     private String username;
@@ -30,12 +29,13 @@ public class User {
     @OneToMany
     private List<TripPost> tripPosts;
 
-    public UUID getUserId() {
-        return userId;
+
+    public UUID getId() {
+        return id;
     }
 
-    public void setUserId(UUID userId) {
-        this.userId = userId;
+    public void setId(UUID userId) {
+        this.id = userId;
     }
 
     public String getUsername() {

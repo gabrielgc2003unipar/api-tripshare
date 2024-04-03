@@ -19,9 +19,10 @@ public class TokenService {
     private final UserRepository userRepository;
     private BCryptPasswordEncoder passwordEncoder;
 
-    public TokenService(JwtEncoder jwtEncoder, UserRepository userRepository) {
+    public TokenService(JwtEncoder jwtEncoder, UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
         this.jwtEncoder = jwtEncoder;
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -43,7 +44,7 @@ public class TokenService {
 
         var claims = JwtClaimsSet.builder()
                 .issuer("tripshare-api")
-                .subject(user.get().getUserId().toString())
+                .subject(user.get().getId().toString())
                 .issuedAt(now)
                 .expiresAt(now.plusSeconds(expiresIn))
                 .claim("scope", scopes)
